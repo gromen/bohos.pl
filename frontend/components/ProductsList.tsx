@@ -24,8 +24,19 @@ const ProductsListStyles = styled.div`
   grid-gap: 60px;
 `;
 
-export default function Products() {
-  const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY);
+interface allProducts {
+  id: string;
+  name: string;
+  price: number;
+  photo: string;
+}
+
+interface ProductsData {
+  allProducts: allProducts[];
+}
+
+export default function ProductsList() {
+  const { data, error, loading } = useQuery<ProductsData>(ALL_PRODUCTS_QUERY);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{`Error: ${error.message}`}</p>;
@@ -33,9 +44,10 @@ export default function Products() {
   return (
     <div>
       <ProductsListStyles>
-        {data.allProducts.map((product) => (
-          <Product key={product.id} product={product} />
-        ))}
+        {data &&
+          data.allProducts.map((product) => (
+            <Product key={product.id} product={product} />
+          ))}
       </ProductsListStyles>
     </div>
   );
