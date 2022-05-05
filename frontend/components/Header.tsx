@@ -18,7 +18,7 @@ const LogoStyles = styled.h1`
 
   svg {
     transform: skew(-7deg);
-    background-color: #000;
+    background-color: var(--black);
     > g {
       fill: #fff;
     }
@@ -31,7 +31,7 @@ const HeaderStyles = styled.header`
     display: grid;
     grid-template-columns: auto 1fr;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     cursor: pointer;
   }
   .sub-bar {
@@ -50,11 +50,11 @@ export default function Header() {
             <Logo />
           </LogoStyles>
         </Link>
+        <Nav />
       </div>
       <div className="sub-bar">
         <p>Search</p>
       </div>
-      <Nav />
     </HeaderStyles>
   );
 }

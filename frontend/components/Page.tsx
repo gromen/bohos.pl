@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
 import Header from './Header';
@@ -20,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
     --maxWidth: 1000px;
     --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
     box-sizing: border-box;
+    font-size: 10px;
   }
   *, *:before, *:after {
     box-sizing: inherit;
@@ -49,7 +51,7 @@ const MainStyles = styled.main`
   padding: 2rem;
 `;
 
-export default function Page({ children }) {
+export default function Page({ children }): JSX.Element {
   return (
     <>
       <GlobalStyles />

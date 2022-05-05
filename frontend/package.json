@@ -63,9 +63,28 @@
     "typescript": "^4.6.4"
   },
   "eslintConfig": {
+    "globals": {
+      "React": true,
+      "google": true,
+      "mount": true,
+      "mountWithRouter": true,
+      "shallow": true,
+      "shallowWithRouter": true,
+      "context": true,
+      "expect": true,
+      "jsdom": true,
+      "JSX": true
+    },
     "extends": [
       "wesbos"
     ],
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
+    },
     "rules": {
       "react/jsx-filename-extension": "off",
       "react/jsx-props-no-spreading": "off"
