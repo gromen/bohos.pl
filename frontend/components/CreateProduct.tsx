@@ -1,21 +1,37 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
+import Router from 'next/router';
 import useForm from './hooks/useForm';
 import Form from './styles/Form';
+import ErrorMessage from './ErrorMessage';
+import { ALL_PRODUCTS_QUERY } from './ProductsList';
 
-const CREATE_PRODUCT = gql`
-  mutation {
-    createProduct(data: { description: "sasas", name: "name", price: 200 }) {
-      description
+const CREATE_PRODUCT_MUTATION = gql`
+  mutation CREATE_PRODUCT_MUTATION(
+    $name: String!
+    $description: String!
+    $price: Int!
+    $image: Upload
+  ) {
+    createProduct(
+      data: {
+        description: $description
+        name: $name
+        price: $price
+        status: "AVAILABLE"
+        photo: { create: { image: $image, altText: $name } }
+      }
+    ) {
       id
-      price
       name
+      description
+      price
     }
   }
 `;
 
 export default function CreateProduct() {
-  const { formData, onChangeInput } = useForm({
+  const { formData, onChangeInput, clearForm } = useForm({
     name: '',
     price: '',
     image: '',
@@ -23,31 +39,26 @@ export default function CreateProduct() {
   });
 
   const [createProduct, { data, loading, error }] = useMutation(
-    CREATE_PRODUCT,
+    CREATE_PRODUCT_MUTATION,
     {
-      variables: {
-        name: formData.name,
-        description: formData.description,
-        price: formData.price,
-        image: formData.image,
-      },
+      variables: formData,
+      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
     }
   );
 
-  function onSubmitForm() {
-    createProduct({
-      variables: {
-        name: formData.name,
-        description: formData.description,
-        price: formData.price,
-        image: formData.image,
-      },
+  const onSubmitForm = async (event) => {
+    event.preventDefault();
+    await createProduct();
+    clearForm();
+    Router.push({
+      pathname: `/product/${data.createProduct.id}`,
     });
-  }
+  };
 
   return (
     <Form onSubmit={onSubmitForm}>
-      <fieldset>
+      <fieldset disabled={loading} aria-busy={loading}>
+        <ErrorMessage error={error} />
         <label htmlFor="file">
           File
           <input
@@ -91,16 +102,7 @@ export default function CreateProduct() {
             onChange={onChangeInput}
           />
         </label>
-        <button
-          type="button"
-          onClick={(event) => {
-            event.preventDefault();
-            // eslint-disable-next-line
-            console.log(formData);
-          }}
-        >
-          + Add product
-        </button>
+        <button type="submit">+ Add product</button>
       </fieldset>
     </Form>
   );
