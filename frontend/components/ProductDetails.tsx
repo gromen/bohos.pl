@@ -22,7 +22,7 @@ const ProductStyles = styled.div`
   }
 `;
 
-const PRODUCT_DETAILS_QUERY = gql`
+export const PRODUCT_DETAILS_QUERY = gql`
   query GET_PRODUCT_DETAILS($id: ID!) {
     Product(where: { id: $id }) {
       id
