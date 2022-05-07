@@ -16,6 +16,7 @@ const UPDATE_PRODUCT_MUTATION = gql`
       id: $id
       data: { name: $name, description: $description, price: $price }
     ) {
+      id
       name
       description
       price
@@ -65,7 +66,7 @@ export default function UpdateProduct({ id }: ComponentProps) {
             id="name"
             name="name"
             placeholder="name"
-            value={formData.name}
+            value={formData.name ?? ''}
             onChange={onChangeInput}
           />
         </label>
@@ -76,7 +77,7 @@ export default function UpdateProduct({ id }: ComponentProps) {
             id="price"
             name="price"
             placeholder="price"
-            value={formData.price}
+            value={formData.price ?? ''}
             onChange={onChangeInput}
           />
         </label>
@@ -87,7 +88,7 @@ export default function UpdateProduct({ id }: ComponentProps) {
             id="description"
             name="description"
             placeholder="Description"
-            value={formData.description}
+            value={formData.description ?? ''}
             onChange={onChangeInput}
           />
         </label>

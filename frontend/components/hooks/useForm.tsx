@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type FormData = {
   name?: string;
@@ -10,6 +10,7 @@ type FormData = {
 
 export default function useForm(initialData = {}) {
   const [formData, setFormData] = useState<FormData>(initialData);
+  const initialValues = Object.values(initialData).join('');
 
   function onChangeInput(event) {
     let { name, value, type } = event.target;
@@ -26,6 +27,10 @@ export default function useForm(initialData = {}) {
       [name]: value,
     });
   }
+
+  useEffect(() => {
+    setFormData(initialData);
+  }, [initialValues]);
 
   function resetForm() {
     setFormData(initialData);

@@ -19,7 +19,7 @@ export default function Product({ product }) {
       <div className="buttonList">
         <Link
           href={{
-            pathname: 'update',
+            pathname: '/edycja',
             query: {
               id: product.id,
             },
