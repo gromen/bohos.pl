@@ -32,14 +32,11 @@ export default function UpdateProduct({ id }: ComponentProps) {
   const { data, loading, error } = useQuery(PRODUCT_DETAILS_QUERY, {
     variables: { id },
   });
-
   const [
     updateProduct,
     { data: updateData, loading: updateLoading, error: updateError },
   ] = useMutation(UPDATE_PRODUCT_MUTATION);
-
   const { formData, onChangeInput } = useForm(data?.Product);
-
   const onSubmitForm = async (event) => {
     event.preventDefault();
     await updateProduct({
