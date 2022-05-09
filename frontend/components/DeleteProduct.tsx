@@ -20,7 +20,7 @@ export default function DeleteProduct({ id, children }: ComponentProps) {
   const [deleteProduct, { loading }] = useMutation(DELETE_PRODUCT_MUTATION, {
     variables: { id },
     update(cache, payload) {
-      // TODO TS error
+      // TODO fix TS error
       cache.evict(cache.identify(payload.data.deleteProduct));
       cache.gc();
     },
