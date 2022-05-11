@@ -6,6 +6,8 @@ type FormData = {
   price?: number;
   image?: File | string;
   description?: string;
+  password?: string;
+  email?: string;
 };
 
 export default function useForm(initialData = {}) {

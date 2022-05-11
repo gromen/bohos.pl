@@ -1,5 +1,4 @@
 import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
-import { offsetLimitPagination } from '@apollo/client/utilities';
 import { onError } from '@apollo/link-error';
 import { getDataFromTree } from '@apollo/client/react/ssr';
 import { createUploadLink } from 'apollo-upload-client';
