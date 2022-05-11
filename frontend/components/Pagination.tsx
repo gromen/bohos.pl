@@ -2,12 +2,15 @@ import Head from 'next/head';
 import Link from 'next/link';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import PaginationStyles from './styles/PaginationStyles';
 import ErrorMessage from './ErrorMessage';
-import { perPage } from '../config';
+import { PER_PAGE } from '../config';
 
-const PAGINATION_QUERY = gql`
+type ComponentProps = {
+  page: number;
+};
+
+export const PAGINATION_QUERY = gql`
   query {
     _allProductsMeta {
       count
@@ -15,28 +18,28 @@ const PAGINATION_QUERY = gql`
   }
 `;
 
-export default function Pagination() {
-  const { query } = useRouter();
+export default function Pagination({ page }: ComponentProps) {
   const { data, loading, error } = useQuery(PAGINATION_QUERY);
 
   if (loading) return <p>Loading ....</p>;
   if (error) return <ErrorMessage error={error} />;
 
   const { count } = data._allProductsMeta;
-  const pageCount = Math.ceil(count / perPage);
-  const page = +query.page;
+  const pageCount = Math.ceil(count / PER_PAGE);
 
   return (
     <PaginationStyles>
-      <Head>Bohus.pl | Page {page}</Head>
-      <Link href={`/produkty/${+page - 1}`}>
+      <Head>
+        <title>Bohus.pl | Page {page}</title>
+      </Head>
+      <Link href={`/produkty/${page - 1}`} passHref>
         <a aria-disabled={page <= 1}>poprzednia</a>
       </Link>
       <p>
         Strona {page} z {pageCount}
       </p>
       <p>{count} Produktów</p>
-      <Link href={`/produkty/${page + 1}`}>
+      <Link href={`/produkty/${page + 1}`} passHref>
         <a aria-disabled={page >= pageCount}>następna</a>
       </Link>
     </PaginationStyles>
