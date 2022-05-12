@@ -13,7 +13,13 @@ export default function SignOut() {
   });
 
   return (
-    <button type="button" onClick={() => signOut()}>
+    <button
+      type="button"
+      onClick={async () => {
+        await signOut();
+        window.location.reload();
+      }}
+    >
       Wyloguj
     </button>
   );

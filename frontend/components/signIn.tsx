@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
+import Router from 'next/router';
 import useForm from './hooks/useForm';
 import Form from './styles/Form';
 import ErrorMessage from './ErrorMessage';
@@ -22,7 +23,7 @@ const SIGNIN_MUTATION = gql`
   }
 `;
 
-export default function Signin() {
+export default function SignIn() {
   const { formData, onChangeInput, resetForm } = useForm({
     email: '',
     password: '',
@@ -36,6 +37,7 @@ export default function Signin() {
   const onSubmitForm = async (event) => {
     event.preventDefault();
     await signIn();
+    Router.push('/');
     resetForm();
   };
 
