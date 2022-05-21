@@ -37,7 +37,6 @@ export default function SignIn() {
   const onSubmitForm = async (event) => {
     event.preventDefault();
     await signIn();
-    Router.push('/');
     resetForm();
   };
 

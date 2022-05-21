@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
+import Router from 'next/router';
 import { CURRENT_USER_QUERY } from './User';
 
 const SIGNOUT_MUTATION = gql`
@@ -16,8 +17,12 @@ export default function SignOut() {
     <button
       type="button"
       onClick={async () => {
-        await signOut();
-        window.location.reload();
+        const response = await signOut();
+
+        if (response) {
+          Router.push('/zaloguj');
+        }
+        // window.location.reload();
       }}
     >
       Wyloguj

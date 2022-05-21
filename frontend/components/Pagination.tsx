@@ -30,7 +30,9 @@ export default function Pagination({ page }: ComponentProps) {
   return (
     <PaginationStyles>
       <Head>
-        <title>Bohus.pl | Page {page}</title>
+        <title>
+          Bohus.pl | Strona {page} z {pageCount}
+        </title>
       </Head>
       <Link href={`/produkty/${page - 1}`} passHref>
         <a aria-disabled={page <= 1}>poprzednia</a>
