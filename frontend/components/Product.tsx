@@ -5,6 +5,7 @@ import ItemStyles from './styles/ItemStyles';
 import PriceTag from './styles/PriceTag';
 import Title from './styles/Title';
 import { useUser } from './User';
+import AddToCart from './AddToCart';
 
 type ComponentProps = {
   product: {
@@ -34,6 +35,7 @@ export default function Product({ product }: ComponentProps) {
       </Title>
       <PriceTag>{formatMoney(product.price)}</PriceTag>
       <p>{product.description}</p>
+
       {user && (
         <div className="buttonList">
           <Link
@@ -46,6 +48,7 @@ export default function Product({ product }: ComponentProps) {
           >
             Edytuj 📝
           </Link>
+          <AddToCart id={product.id} />
           <DeleteProduct id={product.id}>Usuń produkt ⛔️</DeleteProduct>
         </div>
       )}
