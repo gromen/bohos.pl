@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const SickButton = styled.button`
-  background: red;
+const BohusButton = styled.button`
+  background: var(--black);
   color: white;
   font-weight: 500;
   border: 0;
@@ -17,4 +17,4 @@ const SickButton = styled.button`
   }
 `;
 
-export default SickButton;
+export default BohusButton;

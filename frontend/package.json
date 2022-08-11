@@ -1,5 +1,5 @@
 {
-  "name": "bohos",
+  "name": "bohus.pl",
   "version": "1.0.0",
   "description": "bohus.pl - oak wood accessories",
   "main": "index.js",
@@ -81,7 +81,12 @@
     "settings": {
       "import/resolver": {
         "node": {
-          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
         }
       }
     },
