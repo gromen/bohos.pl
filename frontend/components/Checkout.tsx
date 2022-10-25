@@ -19,7 +19,7 @@ const CheckoutFormStyles = styled.form`
   grid-gap: 1rem;
 `;
 
-const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
+const stripeLib = loadStripe(`${process.env.STRIPE_SECRET}`);
 
 function CheckoutForm() {
   const [error, setError] = useState();
@@ -30,12 +30,14 @@ function CheckoutForm() {
   async function onSubmit(event) {
     event.preventDefault();
     setLoading(true);
-    console.log('checkout');
     nProgress.start();
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: elements.getElement(CardElement),
     });
+
+    56;
+    console.log(paymentMethod);
 
     if (error) {
       setError(error);
@@ -44,7 +46,6 @@ function CheckoutForm() {
       return;
     }
 
-    console.log(paymentMethod);
     setLoading(false);
   }
   return (
