@@ -68,7 +68,7 @@ async function checkout(
       console.log(err);
       throw new Error(err.message);
     });
-  // console.log(charge);
+  console.log(charge);
 }
 
 export default checkout;
