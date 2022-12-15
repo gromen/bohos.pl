@@ -1,10 +1,10 @@
-import { DropDown, DropDownItem, SearchStyles } from './styles/DropDown';
 import { resetIdCounter, useCombobox } from 'downshift';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/client';
 import debounce from 'lodash.debounce';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
+import { DropDown, DropDownItem, SearchStyles } from './styles/DropDown';
 
 const SEARCH_PRODUCTS_QUERY = gql`
   query SEARCH_PRODUCTS_QUERY($searchTerm: String!) {
@@ -40,6 +40,7 @@ export default function Search() {
     () => debounce(findItems, 350),
     [findItems]
   );
+
   resetIdCounter();
   const {
     isOpen,
@@ -65,6 +66,7 @@ export default function Search() {
     },
     itemToString: (item) => item?.name || '',
   });
+
   return (
     <SearchStyles>
       <div {...getComboboxProps()}>
@@ -94,7 +96,9 @@ export default function Search() {
             </DropDownItem>
           ))}
         {isOpen && !items.length && !loading && (
-          <DropDownItem>Sorry, No items found for {inputValue}</DropDownItem>
+          <DropDownItem>
+            Przepraszamy, brak produktu/ów o nazwie {inputValue}
+          </DropDownItem>
         )}
       </DropDown>
     </SearchStyles>
