@@ -17,3 +17,18 @@ const generatePermissions = Object.fromEntries(
 export const permissions = {
   ...generatePermissions,
 };
+
+export const rules = {
+  canManageProducts({ session }) {
+    if (permissions.canManageProducts({ session })) {
+      return true;
+    }
+    return { user: { id: session.itemId } };
+  },
+  canReadProducts({ session }) {
+    if (permissions.canManageProducts({ session })) {
+      return true;
+    }
+    return { status: 'AVAILABLE' };
+  },
+};
