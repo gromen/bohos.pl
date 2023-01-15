@@ -15,6 +15,7 @@ import { OrderItem } from './schemas/OrderItem';
 import { Order } from './schemas/Order';
 import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './lib/mail';
+import { Role } from './schemas/Role';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-bohus';
@@ -63,6 +64,7 @@ export default withAuth(
       CartItem,
       OrderItem,
       Order,
+      Role,
     }),
     extendGraphqlSchema,
     ui: {
